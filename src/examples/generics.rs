@@ -9,37 +9,6 @@ pub struct Tweet {
     pub retweet: bool,
 }
 
-#[derive(Debug, Clone)]
-pub struct NewsArticle {
-    pub headline: String,
-    pub location: String,
-    pub author: String,
-    pub content: String,
-}
-
-pub trait Summary {
-    fn summarize_author(&self) -> String;
-    // Default implementation
-    fn summarize(&self) -> String {
-        format!("(Read more from {}...)", self.summarize_author())
-    }
-}
-
-impl Summary for NewsArticle {
-    fn summarize_author(&self) -> String {
-        format!("@{}", self.author)
-    }
-    fn summarize(&self) -> String {
-        format!("{}, by {} ({})", self.headline, self.author, self.location)
-    }
-}
-
-impl Summary for Tweet {
-    fn summarize_author(&self) -> String {
-        format!("@{}", self.username)
-    }
-}
-
 fn print_clones<T, U>(t: &T, u: &U)
 where
     T: Display + Clone,
